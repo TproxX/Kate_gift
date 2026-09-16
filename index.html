@@ -1,0 +1,352 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0a0a0a">
+  <title>Para ti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Dancing+Script:wght@400;500&family=Inter:wght@300;400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <div id="progress-bar">
+    <div id="progress-fill"></div>
+  </div>
+
+  <div id="music-widget" class="hidden">
+    <div id="music-icon" onclick="toggleMusic()" role="button" aria-label="Reproducir/Pausar">
+      <svg id="music-play-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </svg>
+      <div id="music-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+      </div>
+    </div>
+    <div id="music-info"><span id="music-now-title">Musica</span></div>
+    <button id="music-mute-btn" onclick="toggleMute()" aria-label="Silenciar">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+        <path id="mute-waves" d="M15.54 8.46a5 5 0 0 1 0 7.07M19.07 4.93a10 10 0 0 1 0 14.14" />
+      </svg>
+    </button>
+  </div>
+
+  <div id="secret-star" role="button" aria-label="" title="">&#10022;</div>
+  <div id="secret-modal" class="hidden" role="dialog" aria-modal="true">
+    <div id="secret-content">
+      <p class="secret-intro">Encontraste algo que no estaba pensado<br>para que encontraras tan rapido.</p>
+      <p class="secret-msg">
+        Gracias por explorar hasta aqui.<br>
+        Significa que estuviste presente en cada detalle.<br>
+        Y eso dice mucho de ti.
+      </p>
+      <button onclick="closeSecret()">Cerrar</button>
+    </div>
+  </div>
+
+  <section id="screen-intro" class="screen full-screen">
+    <canvas id="particles-canvas" aria-hidden="true"></canvas>
+    <div class="intro-content">
+      <p class="intro-line" id="intro-line-1">Hoy queria darte algo diferente.</p>
+      <p class="intro-line" id="intro-line-2">Asi que hice esto para ti.</p>
+      <button id="open-gift-btn" class="btn-primary hidden" onclick="startExperience()">
+        <span>Abrir regalo</span>
+        <div class="btn-glow" aria-hidden="true"></div>
+      </button>
+    </div>
+  </section>
+
+  <section id="screen-phrase" class="screen hidden-section">
+    <div class="phrase-content">
+      <p class="phrase-main" id="phrase-1" aria-live="polite"></p>
+      <p class="phrase-secondary" id="phrase-2" aria-live="polite"></p>
+    </div>
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-dot"></div>
+    </div>
+  </section>
+
+  <section id="screen-memories" class="screen hidden-section">
+    <div class="section-header">
+      <p class="section-eyebrow">Algunos recuerdos</p>
+      <h2 class="section-title">Pequeños momentos<br>para recordar.</h2>
+    </div>
+    <div class="memories-list">
+
+      <article class="memory-card reveal-card">
+        <div class="memory-img-wrap">
+          <img src="images\Kate_chiquita.jpeg" alt="Recuerdo 1" class="memory-photo"
+            onerror="this.parentElement.classList.add('no-photo')">
+          <div class="memory-photo-placeholder" aria-hidden="true">
+            <span class="placeholder-date"></span><span class="placeholder-symbol">&#10022;</span>
+          </div>
+        </div>
+        <div class="memory-body">
+          <span class="memory-date">31 de Octubre</span>
+          <p class="memory-quote">Giselte chiquita</p>
+          <p class="memory-text">Cuando aun no conocia el vicio (Free fire)</p>
+        </div>
+      </article>
+
+      <article class="memory-card reveal-card">
+        <div class="memory-img-wrap">
+          <img src="images\kate_comelona.jpeg" alt="Recuerdo 2" class="memory-photo"
+            onerror="this.parentElement.classList.add('no-photo')">
+          <div class="memory-photo-placeholder" aria-hidden="true">
+            <span class="placeholder-date"></span><span class="placeholder-symbol">&#10022;</span>
+          </div>
+        </div>
+        <div class="memory-body">
+          <span class="memory-date">16 de Enero, 2024</span>
+          <p class="memory-quote">Kate reponiendo fuerzas despues del gym</p>
+          <p class="memory-text">Te ves super tierna en esa foto, tus cachetes son muy lindos</p>
+        </div>
+      </article>
+
+      <article class="memory-card reveal-card">
+        <div class="memory-img-wrap">
+          <img src="images\kate_cumple.jpeg" alt="Recuerdo 3" class="memory-photo"
+            onerror="this.parentElement.classList.add('no-photo')">
+          <div class="memory-photo-placeholder" aria-hidden="true">
+            <span class="placeholder-date"></span><span class="placeholder-symbol">&#10022;</span>
+          </div>
+        </div>
+        <div class="memory-body">
+          <span class="memory-date">16 de Septiembre, 2025</span>
+          <p class="memory-quote">Kate cumpleanera, primer cumple fuera del pais</p>
+          <p class="memory-text">Las flores conbinan con tu sonricita</p>
+        </div>
+      </article>
+
+      <article class="memory-card reveal-card">
+        <div class="memory-img-wrap">
+          <img src="images\kate_grande.jpeg" alt="Recuerdo 4" class="memory-photo"
+            onerror="this.parentElement.classList.add('no-photo')">
+          <div class="memory-photo-placeholder" aria-hidden="true">
+            <span class="placeholder-date"></span><span class="placeholder-symbol">&#10022;</span>
+          </div>
+        </div>
+        <div class="memory-body">
+          <span class="memory-date">30 de Agosto, 2026</span>
+          <p class="memory-quote">Kate casi veinteanera</p>
+          <p class="memory-text">Te ves hermosa, espero la hayas pasado increible</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="screen-details" class="screen hidden-section">
+    <div class="section-header">
+      <p class="section-eyebrow">Cosas chiquitas</p>
+      <h2 class="section-title">Y hay algunas<br>cosas mas que resaltar...</h2>
+    </div>
+    <div class="details-grid">
+
+      <div class="detail-item" onclick="toggleDetail(this)" role="button" tabindex="0" aria-expanded="false">
+        <div class="detail-header">
+          <span class="detail-icon" aria-hidden="true">&#10022;</span>
+          <span class="detail-label">Una cosa que admiro de ti...</span>
+          <span class="detail-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+        <div class="detail-body">
+          <p>La forma en la que luchas por lo que quieres y no te rindes.
+          </p>
+        </div>
+      </div>
+
+      <div class="detail-item" onclick="toggleDetail(this)" role="button" tabindex="0" aria-expanded="false">
+        <div class="detail-header">
+          <span class="detail-icon" aria-hidden="true">&#10022;</span>
+          <span class="detail-label">Algo que siempre me hace recordarte...</span>
+          <span class="detail-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+        <div class="detail-body">
+          <p> Cualquier cosa relacionada a el cuidado de la piel</p>
+        </div>
+      </div>
+
+      <div class="detail-item" onclick="toggleDetail(this)" role="button" tabindex="0" aria-expanded="false">
+        <div class="detail-header">
+          <span class="detail-icon" aria-hidden="true">&#10022;</span>
+          <span class="detail-label">Una pequena razon por la que eres importante...</span>
+          <span class="detail-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+        <div class="detail-body">
+          <p>Porque cambiaste mi vida y la forma de verla, y por primera vez quise cambiar quien era por alguien mas</p>
+        </div>
+      </div>
+
+      <div class="detail-item" onclick="toggleDetail(this)" role="button" tabindex="0" aria-expanded="false">
+        <div class="detail-header">
+          <span class="detail-icon" aria-hidden="true">&#10022;</span>
+          <span class="detail-label">Algo que espero que nunca olvides...</span>
+          <span class="detail-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+        <div class="detail-body">
+          <p>Que tu felicidad debe ser siempre tu meta, el dinero es importante pero la felicidad aun mas peque</p>
+        </div>
+      </div>
+
+      <div class="detail-item" onclick="toggleDetail(this)" role="button" tabindex="0" aria-expanded="false">
+        <div class="detail-header">
+          <span class="detail-icon" aria-hidden="true">&#10022;</span>
+          <span class="detail-label">Mi momento favorito contigo fue...</span>
+          <span class="detail-arrow" aria-hidden="true">&#8250;</span>
+        </div>
+        <div class="detail-body">
+          <p>La primera vez que fuimos juntos a la estacion, y te manchaste tu pantalon por estar pintandome mis unas
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="screen-letter" class="screen hidden-section">
+    <p class="letter-intro-text">Hay algo que queria decirte.</p>
+    <div id="envelope-wrap">
+      <div id="envelope" onclick="openEnvelope()" role="button" aria-label="Abrir carta">
+        <div class="envelope-flap" aria-hidden="true"></div>
+        <div class="envelope-body" aria-hidden="true">
+          <div class="envelope-seal"><span aria-hidden="true">&#10022;</span></div>
+        </div>
+        <div class="envelope-left" aria-hidden="true"></div>
+        <div class="envelope-right" aria-hidden="true"></div>
+        <div class="envelope-bottom" aria-hidden="true"></div>
+      </div>
+      <p class="envelope-hint">Toca para abrir</p>
+    </div>
+    <div id="letter-content" class="hidden">
+      <div class="letter-paper">
+        <div class="letter-paper-inner">
+          <p class="letter-salutation">Querida [NOMBRE],</p>
+          <div class="letter-body-text">
+            <!-- CARTA -->
+            <p>FELIZZZ CUMPLEAÑOSSSS 🙉</p>
+
+            <P> Quería empezar felicitándote por esos 20 añotes. Hace nada eras una menorcita y ahora eres una menorcita
+              un poquito más grande jajaja. </P>
+
+            <p>Kate, eres una persona hermosa por fuera y muchísimo más por dentro. Eres diferente, y creo que
+              precisamente eso es lo que te hace brillar entre los demás. No solo tienes un lindo corazoncito de pollo,
+              sino que además eres tan trabajadora, delicada y dedicada, que hasta resulta sorprendente ver cómo logras
+              combinar todas esas cosas en una sola personita.</p>
+
+            <p>Haberte conocido ha sido, sin duda, una de las mejores experiencias de mi vida, y me considero demasiado
+              afortunado por el simple hecho de poder decir que tuve la oportunidad de conocer, aunque fuera un poquito,
+              a un ser tan lindo como tú. A alguien que siempre busca una manera diferente de hacer las cosas, que no se
+              deja convencer fácilmente cuando le dicen que no puede hacer algo, que intenta dar lo mejor de sí misma
+              incluso en las cosas más
+              pequeñas y, sobre todo, a una mujer a la que le encanta verse hermosa para ella misma. Esa ultima parte me
+              encanta de ti.</p>
+            <p>Ojalá en estos 20 añitos conozcas lugares que todavía no
+              imaginas, vivas experiencias que algún día recuerdes con una sonrisa y encuentres personas que sepan
+              valorar ese corazoncito tan bonito que tienes (AMIG@s😊👌 , mujeres preferiblemente).</p>
+
+            <p>También espero que, cuando lleguen esos días en los que las cosas no salgan como quieres —porque
+              inevitablemente van a existir— recuerda todo lo que eres capaz de hacer y todo lo que has conseguido a tan
+              corta edad y a punta de tu esfuerzo.
+              No seas demasiado dura contigo misma y que puedas mirarte como la persona tan valiente y hermosa que yo
+              veo.</p>
+
+            <p>Me alegra muchísimo haber formado aunque sea una pequeña parte de tu historia y haber podido conocer esa
+              versión tuya que nadie conocia. No sé qué tantas vueltas vaya a dar la vida,
+              ni qué cosas nos esperan más adelante, pero sí sé que siempre voy a quererte porque vales cada sentimiento
+              y mas.</p>
+
+            <p>Así que hoy me encantaria que disfrutes muchísimo tu día. Ojala te consientan como lo mereces, que te
+              gasten
+              algo rico, que te pongas bien bonita —aunque eso ya lo haces naturalmente— y que
+              por hoy te olvides de todo lo demás y simplemente disfrutes tener esos 20 añitos.</p>
+
+            <p>Gracias por ser tú, pequeño limoncito.</p>
+
+            <p>Y feliz cumpleaños, Kate.</p>
+            <!-- CARTA -->
+          </div>
+          <p class="letter-sign">Con todo el cariño,<br><em>Yo</em></p>
+        </div>
+      </div>
+      <button class="btn-secondary" onclick="scrollToNext('screen-music')" style="margin-top:2.5rem;">Continuar</button>
+    </div>
+  </section>
+
+  <section id="screen-music" class="screen hidden-section">
+    <div class="section-header">
+      <p class="section-eyebrow">para escuchar</p>
+      <h2 class="section-title">Queria dejarte<br>algunas canciones que siento que te representan.</h2>
+    </div>
+    <p class="music-subtitle">Espero las disfrutes.</p>
+    <div id="main-player" role="region" aria-label="Reproductor de musica">
+      <div id="player-info">
+        <p id="player-song-title">Elige una cancion</p>
+        <p id="player-song-artist"></p>
+      </div>
+      <div id="player-controls">
+        <button id="player-play-btn" onclick="playerToggle()" disabled aria-label="Play/Pausa">
+          <svg id="player-play-icon" viewBox="0 0 24 24" fill="currentColor">
+            <polygon points="5,3 19,12 5,21" />
+          </svg>
+        </button>
+      </div>
+      <div id="player-progress-wrap">
+        <div id="player-progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div id="player-progress-fill"></div>
+        </div>
+        <div id="player-time">
+          <span id="player-current">0:00</span>
+          <span id="player-duration">0:00</span>
+        </div>
+      </div>
+    </div>
+    <div id="song-list" role="list"></div>
+  </section>
+
+  <section id="screen-final" class="screen hidden-section">
+    <div class="final-content">
+      <p class="final-line" id="final-line-1">Y por ultimo...</p>
+      <p class="final-line" id="final-line-2">Pero no menos importante.</p>
+      <p class="final-birthday" id="final-birthday">
+        Feliz cumpleaños, <span class="final-name">[NOMBRE]</span> &#10084;&#65039;
+      </p>
+      <button id="last-thing-btn" class="btn-primary" onclick="showLastThing()">
+        <span>Una ultima cosa...</span>
+        <div class="btn-glow" aria-hidden="true"></div>
+      </button>
+    </div>
+    <div id="last-surprise" class="hidden">
+      <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+      <div id="final-message">
+        <!-- MENSAJE FINAL -->
+        <p>Gracias por existir.<br>Gracias por ser tu.<br>Gracias por estar.</p>
+        <!-- FIN DEL MENSAJE FINAL -->
+        <div class="final-star" aria-hidden="true">&#10022;</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="back-to-top" class="hidden">
+    <button onclick="backToTop()">Volver al inicio</button>
+  </div>
+
+  <audio id="bg-audio" loop preload="none">
+    <source src="audio/PlainWhitesHeyThereDelilah.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="song-audio" preload="none">
+    <source src="" type="audio/mpeg">
+  </audio>
+
+  <script src="js/script.js"></script>
+</body>
+
+</html>
